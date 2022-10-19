@@ -29,6 +29,7 @@ gallery.addEventListener('click', e => {
     if (e.target.nodeName !== 'IMG') {
 		return
 	}
+	
 
     const selectedImage = e.target.getAttribute('data-source')
 
@@ -38,9 +39,11 @@ gallery.addEventListener('click', e => {
 
     instance.show()
     
-    gallery.addEventListener('keydown', e => {
+    window.addEventListener('keydown', e => {
 		if (e.key === 'Escape') {
-			instance.close()
+			instance.close();
+			window.removeEventListener('keydown', onEscKeyPress);
+			window.removeEventListener('click', closeWindowOnClick);
 		}
 	})
 })
