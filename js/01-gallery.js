@@ -34,16 +34,19 @@ gallery.addEventListener('click', e => {
     const selectedImage = e.target.getAttribute('data-source')
 
     const instance = basicLightbox.create(`
-    <img src="${selectedImage}" width="800" height="600">
-`)
+    <img src="${selectedImage}" width="800" height="600">`, {
+	onShow: (instance) => {document.addEventListener('keydown', closeWindowOn);},
+    onClose: (instance) => {document.removeEventListener('keydown', closeWindowOn);},});
+
 
     instance.show()
     
-    window.addEventListener('keydown', e => {
+    window.addEventListener('keydown', closeWindowOn)
+	function closeWindowOn(e) 	{
 		if (e.key === 'Escape') {
 			instance.close();
-			window.removeEventListener('keydown', onEscKeyPress);
-			window.removeEventListener('click', closeWindowOnClick);
-		}
-	})
-})
+			return;
+				}
+	}
+});
+
