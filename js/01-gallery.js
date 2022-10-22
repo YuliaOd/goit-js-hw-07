@@ -41,7 +41,6 @@ gallery.addEventListener('click', e => {
 
     instance.show()
     
-    window.addEventListener('keydown', closeWindowOn)
 	function closeWindowOn(e) 	{
 		if (e.key === 'Escape') {
 			instance.close();
